@@ -4,7 +4,9 @@ Tracking my progress through AWS Solutions Architect Associate.
 
 # Completed Sections 
 
--IAM
+- IAM
 - EC2 Fundamentals
-- EBS Volumes / Instance Store
-- Elastic Load Balancing & Autoscaling Groups
+- EC2 Solutions Architect Level
+- EC2 Instance Storage
+- Elastic Load Balancing & Scalability
+- High Availability & Scalability 

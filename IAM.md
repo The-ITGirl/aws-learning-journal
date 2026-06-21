@@ -6,7 +6,7 @@ Users can be assigned to groups.
 
 IAM roles provide temporary credentials.
 
-IAM poloicies are JSON documents that define permissions.
+IAM policies are JSON documents that define permissions.
 
 To follow best practices we should grant users the principles of least privilege.
 

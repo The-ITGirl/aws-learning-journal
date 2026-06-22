@@ -4,8 +4,8 @@
 - EC2 is a virtual machine within the cloud and is referred to as an instance within AWS.
 
 ## Types of Instances
-- General Purpose - 
-- Compute Optimized
+- General Purpose - Balance of compute, memory, and networking. 
+- Compute Optimized - Great for compute intensive task. (HPC/ML/GAMING)
 - Memory Optimized
 - Storage Optimized
 

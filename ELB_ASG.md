@@ -1,43 +1,96 @@
-
 ## Section Overview
-This section focuses on high availability and scalability.
 
-## Takeaways 
- - There are two types of scalability: vertical + horizontal scaling. 
- - Vertical scaling refers to sizing resources up/down. (commonly seen with databases/instances)
- - Horizontal scaling refers to distributed systems. (Think of adding additional nodes)
- - High Availability, increases reliability in case of failure.
+This section focuses on **high availability** and **scalability** in AWS architectures.
 
+## Takeaways
+
+* There are two types of scalability: **vertical scaling** and **horizontal scaling**.
+* **Vertical scaling** refers to increasing or decreasing the resources of a single server (commonly seen with databases and EC2 instances).
+* **Horizontal scaling** refers to adding or removing servers in a distributed system (think adding additional nodes).
+* **High availability** improves reliability by reducing downtime and eliminating single points of failure.
 
 ## Load Balancing
- - A load balancer is a set of servers that distribute traffic to our backend EC2 instances.
- - We can assign a single DNS point to our load balancer. Additionally, we can perform health checks against instances. 
 
-## 4 Kinds of Managed Load Balancers
- - Classic load balancer - older generation. (HTTP/HTTPS/TCP/SSL)
- - Application load balancer - supports HTTP/HTTPS/WebSocket (layer 7)
- - Network load balancer - supports TCP/UDP protocol
- - Gateway load balancer - supports GENEVE protocol (layer 3)
+A load balancer distributes incoming traffic across multiple backend EC2 instances.
 
-## Application Load Balancer
- - Load balances to multiple applications across machines (target groups)
- - Load balances to multiple applications on the same machine (containers)
- - Supports HTTP/ HTTPS/ Websocket
- - Supports redirects from HTTP to HTTPS.
+### Benefits
 
-## Network Load Balancer
- - Forwards TCP & UDP traffic to instances.
- - High performance, handles millions of request per second.
- - Ultra low latency
- - NLB has one static IP per AZ.
+* Improved availability and fault tolerance
+* A single DNS endpoint for clients
+* Health checks to route traffic only to healthy instances
+* Better application scalability
 
-## Gateway Load Balancer
- - Load balancer that uses third party virtual appliances to inspect packets prior to routing to ec2 instances.
- - Packets can be sent through a firewall/IDS/IPS
- - Uses GENEVE protocol 6081
+## Four Types of AWS Managed Load Balancers
+
+### Classic Load Balancer (CLB)
+
+* Legacy load balancer
+* Supports HTTP, HTTPS, TCP, and SSL
+* Generally replaced by ALB and NLB for new deployments
+
+### Application Load Balancer (ALB)
+
+* Operates at **Layer 7 (Application Layer)**
+* Supports HTTP, HTTPS, and WebSocket traffic
+* Can route traffic based on hostnames, paths, headers, and query strings
+* Supports redirects from HTTP to HTTPS
+
+### Network Load Balancer (NLB)
+
+* Operates at **Layer 4 (Transport Layer)**
+* Supports TCP, UDP, and TLS traffic
+* Designed for extremely high performance
+* Handles millions of requests per second with ultra-low latency
+* Provides one static IP address per Availability Zone
+
+### Gateway Load Balancer (GWLB)
+
+* Operates at **Layer 3 / Layer 4**
+* Used to deploy, scale, and manage third-party virtual appliances
+* Commonly used with firewalls, IDS, and IPS solutions
+* Uses the **GENEVE protocol (port 6081)**
+
+## Application Load Balancer (ALB)
+
+* Load balances traffic across multiple applications running on different EC2 instances
+* Can load balance multiple applications running on the same server (containers)
+* Supports HTTP, HTTPS, and WebSocket protocols
+* Supports path-based and host-based routing
+* Supports redirects from HTTP to HTTPS
+
+## Network Load Balancer (NLB)
+
+* Forwards TCP, UDP, and TLS traffic to targets
+* Designed for high-performance workloads
+* Provides ultra-low latency
+* Can handle sudden and extreme traffic spikes
+* Provides one static IP address per Availability Zone
+
+## Gateway Load Balancer (GWLB)
+
+* Routes traffic through third-party virtual appliances before reaching backend resources
+* Commonly used for packet inspection and security enforcement
+* Integrates with firewalls, IDS, and IPS solutions
+* Uses the GENEVE protocol on port 6081
 
 ## Sticky Sessions
- - Stickiness allows client to be redirected to the same instance behind a load balancer. 
- - An ideal use case would be, when you want to ensure users don't lose their session data. However, it is worth noting this can bring imbalance to your instances. 
- - "Cookies," is what makes stickiness possible; and they can be applied at the load balancer or target level.
 
+Sticky sessions (session affinity) ensure a client continues to communicate with the same backend instance behind a load balancer.
+
+### Use Case
+
+* Maintaining user session data when session state is stored locally on an instance
+
+### Considerations
+
+* Can create uneven traffic distribution across instances
+* Relies on cookies generated by either the load balancer or the application
+
+## Quick Exam Reminders
+
+* **ALB = Layer 7 = HTTP/HTTPS/WebSocket**
+* **NLB = Layer 4 = TCP/UDP/TLS**
+* **GWLB = Security Appliances = GENEVE 6081**
+* **Stickiness = Same User → Same Instance**
+* **Horizontal Scaling = More Servers**
+* **Vertical Scaling = Bigger Server**
